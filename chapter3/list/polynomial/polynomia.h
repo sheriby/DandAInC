@@ -6,7 +6,6 @@ typedef struct Node *PtrToNode;
 typedef PtrToNode Polynomial;
 typedef PtrToNode Position;
 
-
 Polynomial createPolynomial();
 
 Polynomial array2Polynomial(int arr[], int len);
@@ -19,6 +18,11 @@ void setNext(Position p, Position next, Polynomial list);
 
 int coefficient(Position pos, Polynomial p);
 int exponent(Position pos, Polynomial p);
+
+void quickSortPolyByExp(Polynomial poly);
+void mergeSort(Polynomial poly);
+Polynomial copyPolynomial(Polynomial src);
+
 
 
 

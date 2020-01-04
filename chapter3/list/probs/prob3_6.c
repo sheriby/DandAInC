@@ -13,10 +13,10 @@
 /**
  * 将两个链表相加，其中两个链表的系数都是有序的,
  * 这样思路和之前的多项式交集并集就是一样的了
- * 
+ *
  * 算法时间复杂度 => O(N)  2N??
  */
-Polynomial polyAdd(Polynomial pol1, Polynomial pol2) {
+Polynomial orderPolyAdd(Polynomial pol1, Polynomial pol2) {
     Polynomial res = createPolynomial();
     Position pres = res;
     Position p1 = advance(pol1);
@@ -63,9 +63,9 @@ Polynomial polyAdd(Polynomial pol1, Polynomial pol2) {
 /**
  * 只是解决了两个有序的链表的相加问题，如果是无序的呢？？？
  * 那就化归就完事了，我们要做的就是将这个多项式变得有序，别无其他。
- * 
+ *
  * 这个函数应该是放在多项式那个文件中来实现。。。定义在头文件中
- * 
+ *
  * 将多项式以指数的大小进行排序
  * 排序方式？
  * 如果我们想要使用交换节点的排序方式，或许冒泡是最容易的选择，但是效率也太低了。
@@ -73,21 +73,36 @@ Polynomial polyAdd(Polynomial pol1, Polynomial pol2) {
  * 理想的排序方式有如下的两种：
  * 快速排序和归并排序。。。
  * 我还是先来复习复习普通数组的快速排序和归并排序吧。
-*/
-void orderPoly(Polynomial poly){
-    // emm, 对链表进行排序，这个emm，有点难度好像
-    
+ */
+Polynomial polyAdd(Polynomial poly1, Polynomial poly2) {
+    mergeSort(poly1);          // 使用归并排序  => 交换节点
+    quickSortPolyByExp(poly2); // 使用快速排序  => 交换节点中的数据
+    return orderPolyAdd(poly1, poly2);
 }
 
+// TODO 经过了排序之后我们似乎可以发现一个比较大的问题，那就是原来的数据被我们更改了。。。
+// 不过想想，似乎也是应该的。。。下面可以使用一个拷贝函数来弥补一下这个缺点
+
+/**
+ * 使用这种方式就可以不该变原来的数据啦~~~
+*/
+Polynomial polyAddNoChange(Polynomial poly1, Polynomial poly2){
+    Polynomial temp1 = copyPolynomial(poly1);
+    Polynomial temp2 = copyPolynomial(poly2);
+
+    return polyAdd(temp1, temp2);
+}
 int main(void) {
-    int arr[] = {1, 2, 3, 4, 5, 6};
-    Polynomial p1 = array2Polynomial(arr, 6);
-    int arr2[] = {3, 2, 3, 5, 1, 10};
-    Polynomial p2 = array2Polynomial(arr2, 6);
+    int arr[] = {1, 3, 2, 4, 6, -1, 7, 2};
+    Polynomial p1 = array2Polynomial(arr, 8);
+    int arr2[] = {3, 3, 3, 2, 5, -1, 6, 1, 3, 4};
+    Polynomial p2 = array2Polynomial(arr2, 10);
     printList(p1);
     printList(p2);
 
-    Polynomial res = polyAdd(p1, p2);
+    Polynomial res = polyAddNoChange(p1, p2);
     printList(res);
+    printList(p1);
+    printList(p2);
     return 0;
 }
