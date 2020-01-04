@@ -27,6 +27,7 @@ ElementType retrieve(Position p);
 void setNext(Position p, Position next, List list);
 ElementType* elementAddr(Position p, List list);
 
+Position findMid(List list);
 
 #endif // _LIST_H_
 

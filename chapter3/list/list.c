@@ -9,7 +9,7 @@ struct Node {
 
 /**
  * 打印整个列表
-*/
+ */
 void printList(List list) {
     Position pos = list->next;
     printf("list: [");
@@ -20,7 +20,7 @@ void printList(List list) {
     printf("%d]\n", pos->element);
 }
 
-List createList(){
+List createList() {
     List list = malloc(sizeof(struct Node));
     list->next = NULL;
 }
@@ -75,10 +75,9 @@ Position find(ElementType x, List list) {
     return pos;
 }
 
-
 /**
  * 获取目标节点的前一个节点，可用于删除这个节点
-*/
+ */
 Position findPrevious(ElementType x, List list) {
     Position pos = list;
     while (pos && pos->next->element != x) {
@@ -87,19 +86,35 @@ Position findPrevious(ElementType x, List list) {
     return pos;
 }
 
-Position findPreviousByAddr(Position pos, List list){
+Position findPreviousByAddr(Position pos, List list) {
     Position tmp = advance(list);
-    if (tmp && advance(tmp) != pos){
+    if (tmp && advance(tmp) != pos) {
         tmp = advance(tmp);
     }
     return tmp;
 }
 
+/**
+ * 找到链表的中间的节点。
+ * 使用快慢指针的形式，快指针每次两个位置，慢指针每次走一个位置。
+ */
+Position findMid(List list) {
+    Position fast = list->next;
+    Position slow = list->next;
+
+    while (fast && fast->next && fast->next->next) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+
 
 /**
  * 删除列表中从左到右第一个指定的值
  */
-void delete(ElementType x, List list) {
+void delete (ElementType x, List list) {
     Position pos, temp;
     pos = findPrevious(x, list);
     if (!isLast(pos, list)) { //事实上这肯定不是最后一个节点
@@ -111,10 +126,10 @@ void delete(ElementType x, List list) {
 
 /**
  * 在目标位置的后面插入元素 参数list没有被使用到
-*/
-void insert(ElementType x, List list, Position pos){
+ */
+void insert(ElementType x, List list, Position pos) {
     Position temp = (Position)malloc(sizeof(struct Node));
-    if (!temp){
+    if (!temp) {
         // 内存不足，分配失败
     }
     temp->element = x;
@@ -124,47 +139,35 @@ void insert(ElementType x, List list, Position pos){
 
 /**
  * 删除列表，和置空列表不一样，这次连头结点都删除了
-*/
-void deleteList(List list){
+ */
+void deleteList(List list) {
     list = makeEmpty(list);
     free(list);
 }
 
 /**
  * 返回表头
-*/
-Position header(List list){
-    return list;
-}
+ */
+Position header(List list) { return list; }
 
 /**
  * 返回表的第一个节点
-*/
-Position first(List list){
-    return list->next;
-}
+ */
+Position first(List list) { return list->next; }
 
 /**
  * 返回下一个位置
-*/
-Position advance(Position pos){
-    return pos->next;
-}
+ */
+Position advance(Position pos) { return pos->next; }
 
 /**
  * 返回位置中的值。
-*/
-ElementType retrieve(Position p){
-    return p->element;
-}
+ */
+ElementType retrieve(Position p) { return p->element; }
 
-ElementType* elementAddr(Position p, List list){
-    return &(p->element);
-}
+ElementType *elementAddr(Position p, List list) { return &(p->element); }
 
 /**
  * 为当前的位置设置next指针的指向
-*/
-void setNext(Position p, Position next, List list){
-    p->next = next;
-}
+ */
+void setNext(Position p, Position next, List list) { p->next = next; }
