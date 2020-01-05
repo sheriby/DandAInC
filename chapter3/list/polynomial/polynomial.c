@@ -35,6 +35,9 @@ void printoneStart(int coe, int exp) {
     if (exp != 0) {
         printf("x");
     } else {
+        if (coe == 1 && exp == 0) {
+            printf("1");
+        }
         return;
     }
     if (exp != 1 && exp > 0) {
