@@ -81,9 +81,9 @@ Polynomial polyMul(Polynomial pol1, Polynomial pol2) {
 
 int main() {
     // int arr[] = {1, 2, 3, 2, 5, -1, 7, 2, 6, -2, 4, -1, 9, -3, 7, -2};
-    int arr[] = {3, 1, 1, 2};
+    int arr[] = {3, -1, 1, 2};
     int len = sizeof(arr) / sizeof(arr[0]);
-    int arr2[] = {3, 2, 2, 1};
+    int arr2[] = {3, 2, 2, -1};
     int len2 = sizeof(arr2) / sizeof(arr2[0]);
 
     Polynomial pol = array2Polynomial(arr, len);

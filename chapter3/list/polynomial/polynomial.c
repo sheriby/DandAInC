@@ -29,23 +29,30 @@ Polynomial array2Polynomial(int arr[], int len) {
 }
 
 void printoneStart(int coe, int exp) {
-    if (coe == -1) {
-        printf("-");
-    } else if (coe != 1) {
+    if (coe != 1) {
         printf("%d", coe);
     }
-    printf("x");
-
-    if (exp != 1) {
+    if (exp != 0) {
+        printf("x");
+    } else {
+        return;
+    }
+    if (exp != 1 && exp > 0) {
         printf("^%d", exp);
+    } else if (exp < 0) {
+        printf("^(%d)", exp);
     }
 }
 
 void printoneNoStart(int coe, int exp) {
     if (coe > 0) {
-        printf("+");
+        printf(" + ");
+        printoneStart(coe, exp);
+
+    } else {
+        printf(" - ");
+        printoneStart(-coe, exp);
     }
-    printoneStart(coe, exp);
 }
 
 void printList(Polynomial list) {
