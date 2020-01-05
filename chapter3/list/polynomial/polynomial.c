@@ -188,12 +188,9 @@ void mergeSort(Polynomial poly) {
     merge(head1, head2);
 }
 
+Position createNode() { return malloc(sizeof(struct Node)); }
 
-Position createNode(){
-    return malloc(sizeof(struct Node));
-}
-
-void copyNode(Position src, Position dest){
+void copyNode(Position src, Position dest) {
     dest->coefficient = src->coefficient;
     dest->exponent = src->exponent;
 }
@@ -214,4 +211,13 @@ Polynomial copyPolynomial(Polynomial src) {
         psrc = psrc->next;
     }
     return dest;
+}
+
+Position createItem(int coe, int exp) {
+    Position tmp = createNode();
+    tmp->coefficient = coe;
+    tmp->exponent = exp;
+    tmp->next = NULL;
+
+    return tmp;
 }

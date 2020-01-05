@@ -21,7 +21,9 @@ int exponent(Position pos, Polynomial p);
 
 void quickSortPolyByExp(Polynomial poly);
 void mergeSort(Polynomial poly);
+Position createItem(int coe, int exp);
 Polynomial copyPolynomial(Polynomial src);
+
 
 
 
