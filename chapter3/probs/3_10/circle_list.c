@@ -135,10 +135,16 @@ void deleteNext(Position pos, List list) {
     if (!pos->next) {
         return;
     }
+    Position del;
     if (pos->next == list) {
+        del = list->next;
         list->next = list->next->next;
+        free(del); // 释放空间
+    } else {
+        del = pos->next;
+        pos->next = pos->next->next;
+        free(del);
     }
-    pos->next = pos->next->next;
 }
 
 /**
