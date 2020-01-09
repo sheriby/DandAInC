@@ -1,5 +1,5 @@
 #ifndef _DEQUE_H_
-#define _DEQUEUE_H_
+#define _DEQUE_H_
 
 struct DequeRecord;
 typedef struct DequeRecord *Deque;
