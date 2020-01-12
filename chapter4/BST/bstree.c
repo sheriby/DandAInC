@@ -86,6 +86,16 @@ SearchTree insert(ElementType ele, SearchTree t) {
     return t;
 }
 
+SearchTree array2Tree(ElementType arr[], int len) {
+    int i;
+    SearchTree t = NULL;
+    for (i = 0; i < len; i++) {
+        t = insert(arr[i], t);
+    }
+
+    return t;
+}
+
 /**
  * 删除节点需要注意一点，因为要删除的节点似乎可能有很多的子节点
  *
@@ -148,7 +158,7 @@ void suffixTree(SearchTree t) {
     }
 }
 
-void suffix(SearchTree t){
+void suffix(SearchTree t) {
     suffixTree(t);
     printf("\n");
 }
@@ -188,7 +198,7 @@ void prefixTree(SearchTree t) {
     }
 }
 
-void prefix(SearchTree t){
+void prefix(SearchTree t) {
     prefixTree(t);
     printf("\n");
 }

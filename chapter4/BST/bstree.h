@@ -15,6 +15,8 @@ typedef int ElementType;
 
 Position createNode(ElementType ele);
 void makeEmpty(SearchTree t);
+SearchTree array2Tree(ElementType arr[], int len);
+
 Position find(ElementType ele, SearchTree t);
 Position findMin(SearchTree t);
 Position findMax(SearchTree t);
