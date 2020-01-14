@@ -38,7 +38,7 @@ SearchTree rotateLeft(SearchTree t) {
     Position r = right(t);
     setRight(t, left(r));
     setLeft(r, t);
-    return t;
+    return r;
 }
 
 int main(int argc, char const *argv[]) {
