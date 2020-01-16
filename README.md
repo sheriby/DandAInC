@@ -1,2 +1,3 @@
-## 数据结构算法与应用 C语言描述 第二版
-学习过程中写的一些简单的代码
+## Data Structures and Algorithm Analysis in C Second Edition
+
+Some easy and simple code when reading this book.
