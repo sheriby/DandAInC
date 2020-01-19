@@ -85,6 +85,7 @@ ElementType frontAndDeQueue(Queue q) {
         ElementType temp = q->elements[q->front];
         q->front = forward(q->front, q);
         q->size--;
+        return temp;
     }
 }
 
