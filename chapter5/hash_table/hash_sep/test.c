@@ -16,6 +16,8 @@ void test(){
     printf("=%s=\n", retrieve(find("hello", h)));
     printf("=%s=\n", retrieve(find("helloWorld", h)));
     printf("=%s=\n", retrieve(find("hello orld", h)));
+
+    destroyTable(h);
 }
 
 int main(int argc, char const *argv[]) {

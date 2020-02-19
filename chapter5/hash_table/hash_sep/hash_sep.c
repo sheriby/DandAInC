@@ -51,7 +51,7 @@ static void Next2Power(int *tableSize, int *power) {
     *tableSize = val;
 }
 
-static void initEmpty(HashTable h) {
+static void makeEmpty(HashTable h) {
     int i;
     for (i = 0; i < h->talbeSize; i++) {
         // this function is only for initialization, so don't need to
@@ -59,6 +59,33 @@ static void initEmpty(HashTable h) {
         h->lists[i]->next = NULL;
     }
 }
+
+// HashTable initializeTable(int tableSize) {
+//     HashTable h;
+//     int i;
+
+//     h = (HashTable)malloc(sizeof(struct HashTbl));
+
+//     if (tableSize < MIN_TABLE_SIZE) {
+//         h->talbeSize = MIN_TABLE_SIZE;
+//         h->power = 4;
+//     } else {
+//         Next2Power(&h->talbeSize, &h->power);
+//     }
+//     h->lists = (List *)malloc(sizeof(List) * h->talbeSize);
+//     // h->lists = malloc(sizeof(struct ListNode) * h->talbeSize);
+//     for (i = 0; i < h->talbeSize; i++) {
+//         h->lists[i] = (List)malloc(sizeof(struct ListNode));
+//         h->lists[i]->next = NULL;
+//     }
+
+//     return h;
+// }
+
+// impove he function `initializeTable`, there are too many malloc when we create the head
+// node. We just need to malloc once!
+// And if changing the way of malloc, we must changing the method of Destroy as well.
+// Ensure malloc and free mathes!
 
 HashTable initializeTable(int tableSize) {
     HashTable h;
@@ -73,13 +100,13 @@ HashTable initializeTable(int tableSize) {
         Next2Power(&h->talbeSize, &h->power);
     }
     h->lists = (List *)malloc(sizeof(List) * h->talbeSize);
-    // h->lists = malloc(sizeof(struct ListNode) * h->talbeSize);
+    // Here we just malloc once!
+    List temp= (List)malloc(sizeof(struct ListNode) * h->talbeSize);
     for (i = 0; i < h->talbeSize; i++) {
-        h->lists[i] = (List)malloc(sizeof(struct ListNode));
+        h->lists[i] = &temp[i];
         h->lists[i]->next = NULL;
     }
-
-    // initEmpty(h);
+    
     return h;
 }
 
@@ -92,11 +119,20 @@ static void freeList(List list) {
     }
 }
 
+// void destroyTable(HashTable h) {
+//     int i;
+//     for (i = 0; i < h->talbeSize; i++) {
+//         freeList(h->lists[i]); // free the list
+//     }
+//     free(h->lists); // free the table
+// }
+
 void destroyTable(HashTable h) {
     int i;
     for (i = 0; i < h->talbeSize; i++) {
-        freeList(h->lists[i]); // free the list
+        freeList(h->lists[i]->next); // free the list
     }
+    free(h->lists[0]); // free all head node
     free(h->lists); // free the table
 }
 
